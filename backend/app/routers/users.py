@@ -1,8 +1,11 @@
+from typing import Annotated
+
 from fastapi import APIRouter, Depends, HTTPException
-from sqlmodel import Session
+from sqlmodel import Session, select
 from ..models import User, UserCreate, UserRead
 from ..database import get_session
-from ..auth import create_access_token, verify_password, get_password_hash
+from ..auth import create_access_token, verify_password, get_password_hash, get_current_active_user, \
+    get_user_by_username, oauth2_scheme, authenticate_user
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
@@ -17,9 +20,14 @@ def register(user: UserCreate, session: Session = Depends(get_session)):
     return user
 
 @router.post("/login")
-def login(email: str, password: str, session: Session = Depends(get_session)):
-    user = session.query(User).filter(User.email == email).first()
-    if not user or not verify_password(password, user.password_hash):
+def login(username: str, password: str, session: Annotated[Session, Depends(get_session)], token: Annotated[str, Depends(oauth2_scheme)]):
+    user = authenticate_user(session, username, password)
+    if not user:
         raise HTTPException(status_code=400, detail="Invalid credentials")
-    token = create_access_token({"sub": str(user.id)})
-    return {"access_token": token, "token_type": "bearer"}
+    return token
+
+@router.get("/users/me", response_model=UserRead)
+def read_users_me(current_user: Annotated[User, Depends(get_current_active_user)]):
+    return current_user
+
+
