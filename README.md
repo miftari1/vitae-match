@@ -57,6 +57,14 @@ It uses **FastAPI**, **React**, **TailwindCSS**, and **Sentence Transformers (NL
 
 ---
 
+### **Here’s a list of all available API routes in the **Vitae-Match** backend:**
+
+- **POST /users/register** — Register a new user  
+- **POST /login** — Log in and receive a JWT token  
+- **GET /users/me** — Retrieve information about the current authenticated user  
+- **GET /users/me/analyses** — Get all previous analysis sessions for the current user  
+- **POST /analyze** — Upload a resume and job description to get a similarity match and skill comparison
+
 ## 🧰 Setup Instructions
 
 ### 🖥️ **Backend**
@@ -72,15 +80,7 @@ uvicorn app.main:app --reload
 ### 💻 **Frontend**
 cd frontend
 npm install
-npm run start
-
-### **Here’s a list of all available API routes in the **Vitae-Match** backend:**
-
-- **POST /users/register** — Register a new user  
-- **POST /login** — Log in and receive a JWT token  
-- **GET /users/me** — Retrieve information about the current authenticated user  
-- **GET /users/me/analyses** — Get all previous analysis sessions for the current user  
-- **POST /analyze** — Upload a resume and job description to get a similarity match and skill comparison  
+npm run start  
 
 ## 📊 **Example API Usage**
 
