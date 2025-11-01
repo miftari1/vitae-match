@@ -107,3 +107,4 @@ test_output/
 debug/
 logs/
 backend/uploaded_resumes
+backend/vitae_match.db
