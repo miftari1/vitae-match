@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from '../api';
+import { useLocation } from "react-router-dom";
+import React, { useState } from 'react';
 
 interface Analysis {
   id: number;
@@ -9,12 +9,11 @@ interface Analysis {
   missing_skills: string[];
 }
 
-const Dashboard: React.FC = () => {
-  const [analyses, setAnalyses] = useState<Analysis[]>([]);
 
-  useEffect(() => {
-    // Fetch analyses
-  }, []);
+const Dashboard: React.FC = () => {
+  const location = useLocation();
+  const analysisFromState = location.state?.analysis;
+  const [analyses, setAnalyses] = useState<Analysis[]>(analysisFromState ? [analysisFromState] : []);
 
   return (
     <div className="p-6">

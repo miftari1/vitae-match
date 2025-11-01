@@ -1,11 +1,13 @@
 import axios from "axios";
 import { FormEvent, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 export default function AnalyzeForm() {
   const [textInput, setTextInput] = useState("");
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [result, setResult] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,15 +20,20 @@ export default function AnalyzeForm() {
     setResult(null);
 
     try {
+      const token = localStorage.getItem("token");
       const formData = new FormData();
-      formData.append("text_input", textInput);
-      formData.append("pdf_file", pdfFile);
+      formData.append("job_description", textInput);
+      formData.append("file", pdfFile);
+
 
       const response = await axios.post("http://127.0.0.1:8000/analyze", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { "Content-Type": "multipart/form-data",
+                    "Authorization": `Bearer ${token}`
+        },
       });
 
-      setResult(response.data.result); // assuming backend returns { result: "..." }
+      setResult(response.data.result);
+      navigate("/dashboard", { state: { analysis: response.data } });
     } catch (error: any) {
       setResult(error.response?.data?.detail || "An error occurred");
     } finally {

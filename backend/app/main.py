@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from .database import create_db_and_tables
-from .routers import users, token
+from .routers import users, token, analysis
 
 
 @asynccontextmanager
@@ -27,6 +27,7 @@ app.add_middleware(
 
 app.include_router(token.router)
 app.include_router(users.router)
+app.include_router(analysis.router)
 
 
 
