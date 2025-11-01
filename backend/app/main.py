@@ -1,9 +1,17 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-from .database import create_dh_and_tables
+from .database import create_db_and_tables
 from .routers import users, token
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_db_and_tables()
+    yield
+
+app = FastAPI(lifespan=lifespan)
 
 origins = [
     "http://localhost:3000",
@@ -16,10 +24,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.include_router(users.router)
-app.include_router(token.router)
 
-def main():
-    if __name__ == "__main__":
-        create_dh_and_tables()
-        
+app.include_router(token.router)
+app.include_router(users.router)
+
+
+

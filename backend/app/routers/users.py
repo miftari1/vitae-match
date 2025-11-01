@@ -17,7 +17,7 @@ def register(user: UserCreate, session: Session = Depends(get_session)):
     session.refresh(user)
     return user
 
-@router.get("/users/me", response_model=UserPublic)
+@router.get("/me", response_model=UserPublic)
 def read_users_me(current_user: Annotated[User, Depends(get_current_active_user)]):
     return current_user
 

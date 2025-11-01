@@ -3,7 +3,7 @@ from sqlmodel import SQLModel, Session, create_engine
 DATABASE_URL = "sqlite:///./vitae_match.db"
 engine = create_engine(DATABASE_URL, echo=False)
 
-def create_dh_and_tables():
+def create_db_and_tables():
     from .models import User
     SQLModel.metadata.create_all(engine)
 

@@ -11,17 +11,17 @@ const Login = () => {
       try {
         const params = new URLSearchParams();
         params.append('username', username);
-        params.append('passowrd', password);
+        params.append('password', password);
         const headers = {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         }
-    const res = await axios.post('/users/login', params, headers);
-    localStorage.setItem('token', res.data.access_token);
-    navigate('/analyze');
+        const res = await axios.post('/token', params, headers);
+        localStorage.setItem('token', res.data.access_token);
+        navigate('/analyze');
       } catch (err: any) {
-      console.error(err.response?.data || err.message);
-      alert('Login failed. Please check your credentials.');
-    }
+          console.error(err.response?.data || err.message);
+          alert('Login failed. Please check your credentials.');
+      }
   }
 
   return (

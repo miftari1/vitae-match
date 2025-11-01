@@ -11,9 +11,9 @@ from ..database import get_session
 from ..models import Token
 
 
-router = APIRouter(tags=["Token"])
+router = APIRouter()
 
-router.post("/token", response_model=Token)
+@router.post("/token", response_model=Token)
 async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     session: Annotated[Session, Depends(get_session)],
