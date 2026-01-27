@@ -36,3 +36,5 @@ def analyze_resume(file_path: str, job_description: str) -> Dict[str, Union[floa
     score = compute_similarity(resume_text, job_description)
 
     return {"score": score, "matched_skills": matched, "missing_skills": missing}
+
+

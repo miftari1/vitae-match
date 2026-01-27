@@ -25,11 +25,13 @@ const Login = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-3xl font-bold mb-4">VitaeMatch Login</h1>
-      <input type="text" placeholder="Username" className="border p-2 mb-2" value={username} onChange={e=>setUsername(e.target.value)} />
-      <input type="password" placeholder="Password" className="border p-2 mb-2" value={password} onChange={e=>setPassword(e.target.value)} />
-      <button className="bg-blue-500 text-white px-4 py-2" onClick={handleLogin}>Login</button>
+    <div>
+        <div className="flex flex-col items-center justify-center h-screen">
+          <h1 className="text-3xl font-bold mb-4">VitaeMatch Login</h1>
+          <input type="text" placeholder="Username" className="border p-2 mb-2" value={username} onChange={e=>setUsername(e.target.value)} />
+          <input type="password" placeholder="Password" className="border p-2 mb-2" value={password} onChange={e=>setPassword(e.target.value)} />
+          <button className="bg-blue-500 text-white px-4 py-2" onClick={handleLogin}>Login</button>
+        </div>
     </div>
   );
 };
