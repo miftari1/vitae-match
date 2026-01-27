@@ -7,16 +7,16 @@ export interface HomePageProps {
 export default function HomePage({ authenticated = false }: HomePageProps) {
   const navItems: { label: string; href: string }[] = authenticated
     ? [
-        { label: "Home", href: "#" },
-        { label: "Analyze", href: "#" },
-        { label: "Profile", href: "#" },
+        { label: "Home", href: "/" },
+        { label: "Analyze", href: "/analyze" },
+        { label: "Profile", href: "/me" },
         { label: "About Us", href: "#" },
       ]
     : [
-        { label: "Home", href: "#" },
+        { label: "Home", href: "/" },
         { label: "About Us", href: "#" },
-        { label: "Login", href: "#" },
-        { label: "Register", href: "#" },
+        { label: "Login", href: "/login" },
+        { label: "Register", href: "/register" },
       ];
 
   return (
