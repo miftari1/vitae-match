@@ -1,6 +1,7 @@
 import axios from "axios";
-import { FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import Navigation from "../components/nav";
 
 export default function AnalyzeForm() {
   const [textInput, setTextInput] = useState("");
@@ -42,31 +43,36 @@ export default function AnalyzeForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white shadow rounded space-y-4">
-      <textarea
-        className="w-full p-2 border rounded"
-        placeholder="Enter text to match"
-        value={textInput}
-        onChange={(e) => setTextInput(e.target.value)}
-      />
-      <input
-        type="file"
-        accept="application/pdf"
-        onChange={(e) => setPdfFile(e.target.files ? e.target.files[0] : null)}
-        className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded file:text-sm file:bg-gray-100 hover:file:bg-gray-200"
-      />
-      <button
-        type="submit"
-        className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600"
-        disabled={loading}
-      >
-        {loading ? "Analyzing..." : "Analyze"}
-      </button>
-      {result && (
-        <div className="mt-4 p-4 bg-gray-100 border rounded">
-          <strong>Result:</strong> {result}
-        </div>
-      )}
-    </form>
-  );
-}
+      <div className="flex flex-col min-h-screen">
+          <Navigation />
+          <div className="flex grow justify-center items-center bg-gray-50 text-gray-900">
+              <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white shadow rounded space-y-4">
+              <textarea
+                  className="w-full p-2 border rounded"
+                  placeholder="Enter text to match"
+                  value={textInput}
+                  onChange={(e) => setTextInput(e.target.value)}
+              />
+              <input
+                  type="file"
+                  accept="application/pdf"
+                  onChange={(e) => setPdfFile(e.target.files ? e.target.files[0] : null)}
+                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded file:text-sm file:bg-gray-100 hover:file:bg-gray-200"
+              />
+              <button
+                  type="submit"
+                  className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  disabled={loading}
+              >
+                  {loading ? "Analyzing..." : "Analyze"}
+              </button>
+              {result && (
+                  <div className="mt-4 p-4 bg-gray-100 border rounded">
+                      <strong>Result:</strong> {result}
+                  </div>
+                  )}
+              </form>
+          </div>
+      </div>
+          );
+          }

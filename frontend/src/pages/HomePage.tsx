@@ -1,44 +1,11 @@
 import React from "react";
+import Navigation from "../components/nav";
 
-export interface HomePageProps {
-  authenticated?: boolean;
-}
-
-export default function HomePage({ authenticated = false }: HomePageProps) {
-  const navItems: { label: string; href: string }[] = authenticated
-    ? [
-        { label: "Home", href: "/" },
-        { label: "Analyze", href: "/analyze" },
-        { label: "Profile", href: "/me" },
-        { label: "About Us", href: "#" },
-      ]
-    : [
-        { label: "Home", href: "/" },
-        { label: "About Us", href: "#" },
-        { label: "Login", href: "/login" },
-        { label: "Register", href: "/register" },
-      ];
+export default function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50 text-gray-900">
-      <nav className="w-full bg-blue-600 text-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Resume Analyzer</h1>
-
-          <ul className="flex gap-6 text-lg">
-            {navItems.map((item) => (
-              <li key={item.label}>
-                <a
-                  href={item.href}
-                  className="hover:text-blue-200 transition-colors"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
+      <Navigation />
 
       <section
         className="w-full h-[60vh] bg-cover bg-center flex flex-col justify-center items-center text-white text-center px-4"
